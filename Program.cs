@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using System.ComponentModel;
+using System.Globalization;
 using System.Runtime.CompilerServices;
 using System.Security.Cryptography.X509Certificates;
 
@@ -140,37 +141,47 @@ namespace OlaMundo
                 string[] vetor = Console.ReadLine().Split(' ');
                 Console.WriteLine($"{vetor[0]},{char.Parse(vetor[1])},{int.Parse(vetor[2])},{double.Parse(vetor[3])}");
             }
-        */
-            Console.WriteLine("Digite 3 numeros :\n");
+            Console.WriteLine("Digite 3 numeros separados por espacço ' ':\n");
             string[] n = Console.ReadLine().Split(" ");
             int n1 = int.Parse(n[0]);
             int n2 = int.Parse(n[1]);
             int n3 = int.Parse(n[2]);
 
             Maior(n1,n2,n3);
-        }
-        
+            }*/
 
-        //Usando funções (vão ser chamadas na main)
-
-        public static int Maior(int n1,int n2,int n3) {
-            if (n1 > n2 && n1 > n3) {
-                Console.WriteLine($"\nO maior numero é o : {n1}");
-                return n1;
-            }
-            else if (n2 > n1 && n2 > n3) {
-                Console.WriteLine($"\nO maior numero é o : {n2}");
-                return n2;
-            }
-            else if (n3 > n1 && n3 > n2)
+            //for em C#
+            Console.WriteLine("Digie 2 numeros separados por Enter");
+            int i = Convert.ToInt32(Console.ReadLine());
+            int io = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine($"contando de {i} ate {io}");
+            for (; i <= io; i++)
             {
-                Console.WriteLine($"\nO maior numero é o : {n3}");
-                return n3;
+                Console.WriteLine(i);
             }
-            else {
-                Console.WriteLine("Valor invalido");
-                return 0;
-            }
-        } 
+
+            /*
+            //Usando funções (vão ser chamadas na main)
+
+            private static int Maior(int n1,int n2,int n3) {
+                if (n1 > n2 && n1 > n3) {
+                    Console.WriteLine($"\nO maior numero é o : {n1}");
+                    return n1;
+                }
+                else if (n2 > n1 && n2 > n3) {
+                    Console.WriteLine($"\nO maior numero é o : {n2}");
+                    return n2;
+                }
+                else if (n3 > n1 && n3 > n2)
+                {
+                    Console.WriteLine($"\nO maior numero é o : {n3}");
+                    return n3;
+                }
+                else {
+                    Console.WriteLine("Valor invalido");
+                    return 0;
+                }*/
+        }
+            
     } 
 }
