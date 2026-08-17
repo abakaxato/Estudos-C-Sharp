@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using OlaMundo.Objetos;
+using System.ComponentModel;
 using System.Globalization;
 using System.Runtime.CompilerServices;
 using System.Security.Cryptography.X509Certificates;
@@ -158,9 +159,9 @@ namespace OlaMundo
             for (; i <= io; i++)
             {
                 Console.WriteLine(i);
-            }*/
+            }
 
-            //Resolvendo um problema sem orientacao a objetos
+            //Resolvendo um problema SEM orientacao a objetos
             Console.WriteLine("Entre com as medidas do triangulo X");
             double xA = double.Parse(Console.ReadLine(),CultureInfo.InvariantCulture);
             Console.WriteLine("Valor digitado " + xA);
@@ -193,7 +194,42 @@ namespace OlaMundo
             }
             else { 
                 Console.WriteLine("Maior Area : Y");
-            }
+            }*/
+
+            //Resolvendo um problema COM orientacao a objetos
+            Console.WriteLine("Entre com as medidas do triangulo X");
+
+            var x = new Triangulo()
+            {
+                Lado1 = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture),
+                Lado2 = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture),
+                Lado3 = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture)
+            };
+
+            x.mostrarLados(); 
+
+            Console.WriteLine("\n Entre com as medidas do triangulo Y");
+
+            var y = new Triangulo()
+            {
+                Lado1 = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture),
+                Lado2 = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture),
+                Lado3 = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture)
+            };
+
+            y.mostrarLados();
+
+            double py = (y.Lado1 + y.Lado2 + y.Lado3) / 2.0;
+            double areay = Math.Sqrt(py * (py - y.Lado1) * (py - y.Lado2) * (py - y.Lado3));
+
+            double px = (x.Lado1 + x.Lado2 + x.Lado3) / 2.0;
+            double areax = Math.Sqrt(px * (px - x.Lado1) * (px - x.Lado2) * (px - x.Lado3));
+
+
+            Console.WriteLine($"Area de X ={areax.ToString("F4", CultureInfo.InvariantCulture)}");
+            Console.WriteLine($"Area de Y ={areay.ToString("F4", CultureInfo.InvariantCulture)}");
+
+
 
 
             /*
@@ -219,5 +255,5 @@ namespace OlaMundo
                 }*/
         }
 
-    } 
+    }
 }
