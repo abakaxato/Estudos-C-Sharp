@@ -148,7 +148,7 @@ namespace OlaMundo
             int n3 = int.Parse(n[2]);
 
             Maior(n1,n2,n3);
-            }*/
+            }
 
             //for em C#
             Console.WriteLine("Digie 2 numeros separados por Enter");
@@ -158,7 +158,43 @@ namespace OlaMundo
             for (; i <= io; i++)
             {
                 Console.WriteLine(i);
+            }*/
+
+            //Resolvendo um problema sem orientacao a objetos
+            Console.WriteLine("Entre com as medidas do triangulo X");
+            double xA = double.Parse(Console.ReadLine(),CultureInfo.InvariantCulture);
+            Console.WriteLine("Valor digitado " + xA);
+            double xB = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
+            Console.WriteLine("Valor digitado " + xB);
+            double xC = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
+            Console.WriteLine("Valor digitado " + xC);
+
+            Console.WriteLine("Entre com as medidas do triangulo Y");
+            double yA = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
+            Console.WriteLine("Valor digitado " + yA);
+            double yB = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
+            Console.WriteLine("Valor digitado " + yB);
+            double yC = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
+            Console.WriteLine("Valor digitado " + yC);
+
+            double xP = (xA + xB + xC) / 2.0;
+            double areax = Math.Sqrt(xP*(xP - xA)*(xP - xB)*(xP - xC));
+
+
+            double yP = (yA + yB + yC) / 2.0;
+            double areay = Math.Sqrt(yP * (yP - yA) * (yP - yB) * (yP - yC));
+
+            Console.WriteLine($"Area de X ={areax.ToString("F4", CultureInfo.InvariantCulture)}");
+            Console.WriteLine($"Area de Y ={areay.ToString("F4", CultureInfo.InvariantCulture)}");
+
+            if (areax > areay)
+            {
+                Console.WriteLine("Maior Area : X");
             }
+            else { 
+                Console.WriteLine("Maior Area : Y");
+            }
+
 
             /*
             //Usando funções (vão ser chamadas na main)
@@ -182,6 +218,6 @@ namespace OlaMundo
                     return 0;
                 }*/
         }
-            
+
     } 
 }
