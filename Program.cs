@@ -40,11 +40,11 @@ namespace OlaMundo
                 int codigo = 5290;
                 char gen = 'M';
                 double preco1 = 2100.0, preco2 = 650.60, medida = 53.234567;
-                Console.WriteLine($"\n\nProdutos : \n{produto1},cujo preço é {preco1}\n{produto2},cujo preço é{preco2}");
+                Console.WriteLinaor decimal invariante culture: {medida.ToString("F3", CultureInfo.InvariantCulture)}");
+            }e($"\n\nProdutos : \n{produto1},cujo preço é {preco1}\n{produto2},cujo preço é{preco2}");
                 Console.WriteLine($"\nRegistro: {idade} anos de idade, código: {codigo}, e gênero: {gen}");
                 Console.WriteLine($"Medida com oito casas decimais{medida}\nArredondado(três casas decimais) : {medida:F3}");
-                Console.WriteLine($"Separaor decimal invariante culture: {medida.ToString("F3", CultureInfo.InvariantCulture)}");
-            }
+                Console.WriteLine($"Separ
 
             //Operadores de atribuição
             {
