@@ -194,7 +194,7 @@ namespace OlaMundo
             }
             else { 
                 Console.WriteLine("Maior Area : Y");
-            }*/
+            }
 
             //Resolvendo um problema COM orientacao a objetos
             Console.WriteLine("Entre com as medidas do triangulo X");
@@ -206,8 +206,6 @@ namespace OlaMundo
                 Lado3 = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture)
             };
 
-            x.mostrarLados(); 
-
             Console.WriteLine("\n Entre com as medidas do triangulo Y");
 
             var y = new Triangulo()
@@ -216,8 +214,6 @@ namespace OlaMundo
                 Lado2 = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture),
                 Lado3 = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture)
             };
-
-            y.mostrarLados();
 
             double py = (y.Lado1 + y.Lado2 + y.Lado3) / 2.0;
             double areay = Math.Sqrt(py * (py - y.Lado1) * (py - y.Lado2) * (py - y.Lado3));
@@ -228,7 +224,33 @@ namespace OlaMundo
 
             Console.WriteLine($"Area de X ={areax.ToString("F4", CultureInfo.InvariantCulture)}");
             Console.WriteLine($"Area de Y ={areay.ToString("F4", CultureInfo.InvariantCulture)}");
+            */
 
+            //Resolvendo um problema COM orientacao a objetos e métodos das classes instanciadas
+            Console.WriteLine("Entre com as medidas do triangulo X");
+
+            var x = new Triangulo()
+            {
+                Lado1 = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture),
+                Lado2 = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture),
+                Lado3 = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture)
+            };
+
+            x.MostrarLados();
+            
+            x.Area();
+
+            Console.WriteLine("\n Entre com as medidas do triangulo Y");
+
+            var y = new Triangulo()
+            {
+                Lado1 = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture),
+                Lado2 = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture),
+                Lado3 = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture)
+            };
+
+            y.MostrarLados();
+            y.Area();
 
 
 
