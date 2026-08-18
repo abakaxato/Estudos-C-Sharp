@@ -240,6 +240,8 @@ namespace OlaMundo
             
             x.Area();
 
+            Console.WriteLine(x);
+
             Console.WriteLine("\n Entre com as medidas do triangulo Y");
 
             var y = new Triangulo()
@@ -251,9 +253,6 @@ namespace OlaMundo
 
             y.MostrarLados();
             y.Area();
-
-
-
             /*
             //Usando funções (vão ser chamadas na main)
 
