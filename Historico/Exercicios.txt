@@ -1,11 +1,6 @@
-﻿using OlaMundo.Classes;
+            
+            Aula 49 - Exercicio 1:
 
-namespace OlaMundo
-{
-    internal class Program
-    {
-        static void Main(string[] args)
-        {
             Console.WriteLine("Qual é a cotação do dólar ? ");
             double cotacao = double.Parse(Console.ReadLine());
 
@@ -13,7 +8,3 @@ namespace OlaMundo
             double moeda = double.Parse(Console.ReadLine());
 
             ConversorDeMoedas.Converter(cotacao,moeda);
-        }
-
-    }
-}
