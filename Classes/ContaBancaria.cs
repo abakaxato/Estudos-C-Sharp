@@ -22,7 +22,7 @@ namespace OlaMundo.Classes
 
 
 
-        public ContaBancaria AbrirContaBancaria(ContaBancaria conta) {
+        public ContaBancaria AbrirContaBancaria() {
             int operacao = 0;
 
             while (operacao != 1)
@@ -80,21 +80,26 @@ namespace OlaMundo.Classes
                     Console.WriteLine("você digitou algo incorreto vamos tentar novamente...\n");
                 }
             }
+            ContaBancaria conta = new ContaBancaria();
             return conta;
         }
 
-        public ContaBancaria AlterarNomeTitular(ContaBancaria contaBancaria,string novoNome){
-            if (novoNome is not null)
-            {
-                contaBancaria.Nome = novoNome;
-            }
-            else {
+        public ContaBancaria AlterarNomeTitular(ContaBancaria contaBancaria){
+            Console.WriteLine($"Digite o novo nome que vai ser utilizado na conta {contaBancaria.NumeroDaConta}");
+            string novoNome = Console.ReadLine();
+            
+            while (novoNome is null) {
                 Console.WriteLine("O novo nome não pode ser vazio");
+                Console.WriteLine($"Digite o novo nome que vai ser utilizado na conta {contaBancaria.NumeroDaConta}");
+                novoNome = Console.ReadLine();
             }
+                contaBancaria.Nome = novoNome;
+                Console.WriteLine("O nome foi alterado com sucesso");
+                Console.WriteLine($"Sua Conta atualmente : ID {contaBancaria.NumeroDaConta}, no nome de {contaBancaria.Nome} e atualmente tem {contaBancaria.Saldo}R$");
             return contaBancaria;
         }
 
-        public void Depositar(ContaBancaria contaBancaria) {
+        public ContaBancaria Depositar(ContaBancaria contaBancaria) {
             int operacao = 0;
             Console.WriteLine($"Olá, Quanto você gostaria de depositar na conta {contaBancaria.NumeroDaConta} ?");
             while (operacao != 1)
@@ -102,19 +107,10 @@ namespace OlaMundo.Classes
                 try
                 {
                     double deposito = double.Parse(Console.ReadLine());
-
-                    if (deposito < 5)
-                    {
-                        Console.WriteLine($"O Deposito não pode ser menor do que 5.00R$ o deposito que você tentou inserir foi de {deposito}");
-                        Console.WriteLine("tente novamente...");
-                    }
-                    else
-                    {
                         Console.WriteLine($"Valor de {deposito}R$ depositado com sucesso");
                         contaBancaria.Saldo += deposito;
-                        Console.WriteLine($"Seu Saldo atual é de {contaBancaria.Saldo}");
+                        Console.WriteLine($"Seu Saldo atual é de {contaBancaria.Saldo}R$");
                         operacao = 1;
-                    }
                 }
                 catch (Exception e)
                 {
@@ -123,9 +119,11 @@ namespace OlaMundo.Classes
                     Console.WriteLine("tente novamente...");
                 }
             }
+
+            return contaBancaria;
         }
 
-        public void Sacar(ContaBancaria contaBancaria)
+        public ContaBancaria Sacar(ContaBancaria contaBancaria)
         {
             int operacao = 0;
 
@@ -134,10 +132,9 @@ namespace OlaMundo.Classes
                 Console.WriteLine($"Seu saldo atual é menor do que 5.00R$, encerrando operação");
                 operacao = 1;
             }
-
-            Console.WriteLine($"Quanto você gostaria de sacar da conta {contaBancaria.NumeroDaConta} ?");
             while (operacao != 1)
             {
+                Console.WriteLine($"Quanto você gostaria de sacar da conta {contaBancaria.NumeroDaConta} ?");
                 try
                 {
                     double saque = double.Parse(Console.ReadLine());
@@ -148,9 +145,9 @@ namespace OlaMundo.Classes
                         Console.WriteLine("tente novamente...");
                         operacao = 1;
                     } else if (saque > (contaBancaria.Saldo - 5)) {
-                        Console.WriteLine($"O saque não pode ser maior do que o valor em conta menos a taxa de 5.00R$ o saque que você tentou fazer foi de : {saque}");
+                        Console.WriteLine($"O saque não pode ser maior do que {saque-5} por causa da taxa de 5.00R$ o saque que você tentou fazer foi de : {saque}");
                         Console.WriteLine($"Saldo na conta : {contaBancaria.Saldo}");
-                        Console.WriteLine("tente novamente...");
+                        Console.WriteLine("tente novamente...\n");
                     }
                     else
                     {
@@ -169,6 +166,7 @@ namespace OlaMundo.Classes
                     Console.WriteLine("tente novamente...");
                 }
             }
+            return contaBancaria;
         }
 
 
