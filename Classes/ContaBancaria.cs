@@ -7,10 +7,12 @@ namespace OlaMundo.Classes
 {
     internal class ContaBancaria
     {
-        public required string Nome { get; set; }
+        private string Nome { get; set; } = string.Empty;
         private double Saldo { get; set; } = 0;
 
         private int NumeroDaConta { get; set; }
+
+        public ContaBancaria() { }
 
         private ContaBancaria(int numeroDaConta, string nomeDoTitular, double depositoInicial = 0){
             Nome = nomeDoTitular;
