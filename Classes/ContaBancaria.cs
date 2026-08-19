@@ -30,7 +30,7 @@ namespace OlaMundo.Classes
                 NumeroDaConta = numeroDaConta
             };
 
-            Console.WriteLine($"Sua Conta foi criada com o ID {NumeroDaConta}, no nome de {Nome} e atualmente tem {Saldo}R$");
+            Console.WriteLine($"Sua Conta foi criada com o ID {contaCriada.NumeroDaConta}, no nome de {contaCriada.Nome} e atualmente tem {contaCriada.Saldo}R$");
             return contaCriada;
         }
 
