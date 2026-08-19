@@ -9,7 +9,6 @@ namespace OlaMundo.Classes
     {
         private string Nome { get; set; } = string.Empty;
         private double Saldo { get; set; } = 0;
-
         private int NumeroDaConta { get; set; }
 
         public ContaBancaria() { }
