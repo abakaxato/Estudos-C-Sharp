@@ -6,11 +6,19 @@ namespace OlaMundo
     {
         static void Main(string[] args)
         {
-            int? x = null;
-            int y = 5;
-            int? a = x ?? 1;
-            Console.WriteLine(a);
-
+            Console.WriteLine("Digita o numero de posições do vetor: ");
+            int n = int.Parse(Console.ReadLine());
+            int[] vetor = new int[n];
+            Console.WriteLine($"Vetor salvo com {n} posições, digite os valores de cada posição :");
+            for (int i = 0; i < n; i++)
+            {
+                Console.WriteLine($"\nPosição {i}:");
+                vetor[i] = int.Parse(Console.ReadLine());
+            }
+            for (int i = 0; i < n; i++)
+            {
+                Console.WriteLine($"valor na posição {i} do vetor : " + vetor[i]);
+            }
         }
 
     }
