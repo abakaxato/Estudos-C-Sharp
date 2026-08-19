@@ -18,7 +18,17 @@ namespace OlaMundo
             for (int i = 0; i < n; i++)
             {
                 Console.WriteLine($"valor na posição {i} do vetor : " + vetor[i]);
+
             }
+            int soma = 0;
+            double resultado = 0;
+            
+            for (int i = 0; i < n; i++)
+            {
+                soma += vetor[i];
+            }
+            resultado = soma / n;
+            Console.WriteLine($"A média desses vetores é {resultado.ToString("F2")}");
         }
 
     }
