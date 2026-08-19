@@ -22,16 +22,65 @@ namespace OlaMundo.Classes
 
 
 
-        public ContaBancaria AbrirContaBancaria(int numeroDaConta, string nomeDoTitular, double depositoInicial = 0) {
-            ContaBancaria contaCriada = new ContaBancaria(numeroDaConta, nomeDoTitular, depositoInicial)
-            {
-                Nome = nomeDoTitular,
-                Saldo = depositoInicial,
-                NumeroDaConta = numeroDaConta
-            };
+        public ContaBancaria AbrirContaBancaria(ContaBancaria conta) {
+            int operacao = 0;
 
-            Console.WriteLine($"Sua Conta foi criada com o ID {contaCriada.NumeroDaConta}, no nome de {contaCriada.Nome} e atualmente tem {contaCriada.Saldo}R$");
-            return contaCriada;
+            while (operacao != 1)
+            {
+                try
+                {
+                    Console.WriteLine("Vamos Abrir a sua conta, Digite o numero da conta :");
+                    int numeroDaConta = int.Parse(Console.ReadLine());
+                    Console.WriteLine("Numero salvo, agora digite o seu nome :");
+                    string nomeDoTitular = Console.ReadLine();
+                    Console.WriteLine("Nome salvo, quer adicionar algum valor a sua nova conta ? digite 's' para Sim e 'n' para não");
+                    char opcao = char.Parse(Console.ReadLine());
+
+
+                    if (opcao == 's')
+                    {
+                        Console.WriteLine("Digite o valor inicial que vai ser inserido na conta");
+                        double depositoInicial = double.Parse(Console.ReadLine());
+
+                        ContaBancaria contaCriada = new ContaBancaria(numeroDaConta, nomeDoTitular, depositoInicial)
+                        {
+                            Nome = nomeDoTitular,
+                            Saldo = depositoInicial,
+                            NumeroDaConta = numeroDaConta
+                        };
+                        Console.WriteLine($"Sua Conta foi criada com o ID {contaCriada.NumeroDaConta}, no nome de {contaCriada.Nome} e atualmente tem {contaCriada.Saldo}R$");
+
+                        operacao = 1;
+
+                        return contaCriada;
+                    }
+                    else if (opcao == 'n')
+                    {
+                        Console.WriteLine("Ok, vamos tentar criar a sua conta com esses dados...");
+                        ContaBancaria contaCriada = new ContaBancaria(numeroDaConta, nomeDoTitular)
+                        {
+                            Nome = nomeDoTitular,
+                            NumeroDaConta = numeroDaConta
+                        };
+                        
+                        Console.WriteLine($"Sua Conta foi criada com o ID {contaCriada.NumeroDaConta}, no nome de {contaCriada.Nome} e atualmente tem {contaCriada.Saldo}R$");
+                        
+                        operacao = 1;
+                        
+                        return contaCriada;
+                        
+                    }
+                    else
+                    {
+                        Console.WriteLine("você digitou algo incorreto vamos tentar novamente...\n");
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("você digitou algo incorreto vamos tentar novamente...\n");
+                }
+            }
+            return conta;
         }
 
         public ContaBancaria AlterarNomeTitular(ContaBancaria contaBancaria,string novoNome){
