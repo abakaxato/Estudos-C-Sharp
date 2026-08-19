@@ -7,8 +7,15 @@ namespace OlaMundo.Objetos
 {
     internal class Triangulo
     {
-        public double Lado1 { get; set; }
-        public double Lado2 { get; set; }
+
+        //Exemplo de Get e Set manipulaveis 
+        public double Lado1 {
+            get { return Lado1; }
+            set { Lado1 = value; } 
+        }
+
+        //Exemplo de Get e Set com manipulação de privacidade
+        public double Lado2 { get; private set; }
         public double Lado3 { get; set; }
         public double P() { 
             double p = ((Lado1 + Lado2 + Lado3) / 2.0);
