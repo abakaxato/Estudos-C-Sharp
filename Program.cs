@@ -7,90 +7,35 @@ namespace OlaMundo
     {
         static void Main(string[] args)
         {
-
-            
-            //instanciando uma lista
-            List<int> listaint = new List<int>();
-
-            //instanciando uma lista já inserindo os valores
-            List<string> listaStrings = new List<string> { "joao", "maria", "pedro", "mabcd", "abc","ana"};
-            
-            //Usando .add para adicionar valores ao final da lista
-            listaStrings.Add("Texto adicionado usando add");
-
-            //Usando o insert para adicionar valores na localização especificada na lista
-            listaStrings.Insert(1, "texto adicionado usando o Insert");
-
-            foreach (string textos in listaStrings)
+            Console.Write("Digite o tamanho N da matriz : ");
+            int n = int.Parse(Console.ReadLine());
+            int[,] matriz = new int[n,n];
+            int linhas = matriz.Rank + 1;
+            for (int i = 0; i < linhas; i++)
             {
-                Console.WriteLine(textos);
-            }
-            Console.WriteLine("----------------------------------------------------------");
-            //verificando o tamanho da lista 
-            Console.WriteLine("tamanho da lista " + listaStrings.Count);
-            Console.WriteLine("----------------------------------------------------------");
-            //procurando valores na lista
-            string valorEncontrado = listaStrings.Find(x => x[0] == 'T');
-            Console.WriteLine("valor encontrado no find : " + valorEncontrado);
-            Console.WriteLine("----------------------------------------------------------");
-            string valorEncontradoFinal = listaStrings.FindLast(x => x[0] == 'a');
-            Console.WriteLine("valor encontrado no findLast : " + valorEncontradoFinal);
-            Console.WriteLine("----------------------------------------------------------");
-            //fazendo uma busca no indice que atende os requisitos
-            int valorNaPosição = listaStrings.FindIndex(x => x[0] == 'm'); //usando lambda
-            Console.WriteLine("Valor da posição pesquisada: " + valorNaPosição);
-            Console.WriteLine("----------------------------------------------------------");
-            int valorNaUltimaPosição = listaStrings.FindLastIndex(Predicate); // usando um predicato
-            Console.WriteLine("Valor da ultima posição pesquisada: " + valorNaUltimaPosição);
-            Console.WriteLine("----------------------------------------------------------");
-
-            //fazendo um filtro na lista
-            List<string> listaFiltrada;
-            listaFiltrada = listaStrings.FindAll(x => x.Length == 3);
-            foreach (string elemento in listaFiltrada)
-            {
-                Console.WriteLine("valor filtrado por 3 caracteres : " + elemento);
-            }
-            Console.WriteLine("----------------------------------------------------------");
-
-            //usando o remove
-            listaStrings.Remove("joao");
-            Console.WriteLine("lista sem o joao\n");
-            foreach (string textos in listaStrings)
-            {
-                Console.WriteLine(textos);
-            }
-            
-            Console.WriteLine("----------------------------------------------------------");
-            //usando o removeAll
-            listaStrings.RemoveAll(x => x.Length == 3);
-            Console.WriteLine("lista sem os valores de 3 caracteres\n");
-            foreach (string textos in listaStrings)
-            {
-                Console.WriteLine(textos);
-            }
-            Console.WriteLine("----------------------------------------------------------");
-            //usando o removeAt
-            listaStrings.RemoveAt(2);
-            Console.WriteLine("lista sem o valor na posição 2(terceiro)\n");
-            foreach (string textos in listaStrings)
-            {
-                Console.WriteLine(textos);
-            }
-            Console.WriteLine("----------------------------------------------------------");
-            //usando o removeRange
-            listaStrings.RemoveRange(1,2);
-            Console.WriteLine("lista sem 2 valores a partir da posição 1\n");
-            foreach (string textos in listaStrings)
-            {
-                Console.WriteLine(textos);
+                Console.WriteLine($"Digite os valores para a linha {i+1} divididos por ' ' espaço : ");
+                string resposta = Console.ReadLine();
+                string []respostaDividida = resposta.Split(" ");
+                matriz[i, 0] = int.Parse(respostaDividida[0]);
+                matriz[i, 1] = int.Parse(respostaDividida[1]);
+                matriz[i, 2] = int.Parse(respostaDividida[2]);
             }
 
-            //metodo usado no find quando não é utilizado o lambda
-            static bool Predicate(string s)
+            Console.WriteLine("Main Diagonal : ");
+            string[] diagonal = new string[linhas];
+            for (int i = 0; i < linhas; i++)
             {
-                return s[0] == 'm';
+                diagonal[i] = matriz[i, i].ToString();
             }
+            Console.WriteLine(diagonal[0] + " " + diagonal[1] + " " + diagonal[2]);
+
+            int negativeNumbers = 0;
+            foreach (var item in matriz){
+                if (item < 0) {
+                    negativeNumbers++;
+                }
+            }
+            Console.WriteLine("Negative numbers = " + negativeNumbers);
         }
     }
 }
