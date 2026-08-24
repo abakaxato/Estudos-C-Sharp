@@ -6,16 +6,11 @@ namespace OlaMundo
     {
         static void Main(string[] args)
         {
-            testes teste = new();
-            int a = 10;
-            int b;
-            teste.Triplicar(ref a);
+            string[] vetor = { "maria","bob","Alex"};
 
-            Console.WriteLine(a);
-
-            teste.Triplicar(a, out b);
-
-            Console.WriteLine(b);
+            foreach (string obj in vetor) {
+                Console.WriteLine(obj);
+            }
 
         }
     }
