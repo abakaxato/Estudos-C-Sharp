@@ -14,11 +14,11 @@ namespace OlaMundo
             for (int i = 0; i < linhas; i++)
             {
                 Console.WriteLine($"Digite os valores para a linha {i+1} divididos por ' ' espaço : ");
-                string resposta = Console.ReadLine();
-                string []respostaDividida = resposta.Split(" ");
-                matriz[i, 0] = int.Parse(respostaDividida[0]);
-                matriz[i, 1] = int.Parse(respostaDividida[1]);
-                matriz[i, 2] = int.Parse(respostaDividida[2]);
+                string [] respostaDividida = Console.ReadLine().Split();
+                for (int j = 0; j < linhas; j++)
+                {
+                    matriz[i, j] = int.Parse(respostaDividida[j]);
+                }
             }
 
             Console.WriteLine("Main Diagonal : ");
