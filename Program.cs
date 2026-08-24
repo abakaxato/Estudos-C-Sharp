@@ -6,30 +6,37 @@ namespace OlaMundo
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Digita o numero de posições do vetor: ");
-            int n = int.Parse(Console.ReadLine());
-            int[] vetor = new int[n];
-            Console.WriteLine($"Vetor salvo com {n} posições, digite os valores de cada posição :");
-            for (int i = 0; i < n; i++)
-            {
-                Console.WriteLine($"\nPosição {i}:");
-                vetor[i] = int.Parse(Console.ReadLine());
-            }
-            for (int i = 0; i < n; i++)
-            {
-                Console.WriteLine($"valor na posição {i} do vetor : " + vetor[i]);
+            Console.Write("Digita o numero de produtos: ");
 
-            }
-            int soma = 0;
-            double resultado = 0;
+            int n = int.Parse(Console.ReadLine());
+            
+            Produto[] vetor = new Produto[n];
+            
+            Console.WriteLine($"{n} Produtos serão salvos, digite os valores de cada produto :");
             
             for (int i = 0; i < n; i++)
             {
-                soma += vetor[i];
+                vetor[i] = new Produto();
+                Console.WriteLine($"\nProduto {i}:");
+                Console.Write("Digite o nome do produto: ");
+                vetor[i].Nome = Console.ReadLine();
+                Console.Write("Digite o Preco do produto: ");
+                vetor[i].Preco = double.Parse(Console.ReadLine());
+            }
+            for (int i = 0; i < n; i++)
+            {
+                Console.WriteLine(vetor[i].ToString());
+            }
+
+            double soma = 0;
+            double resultado = 0;
+
+            for (int i = 0; i < n; i++)
+            {
+                soma += vetor[i].Preco;
             }
             resultado = soma / n;
-            Console.WriteLine($"A média desses vetores é {resultado.ToString("F2")}");
+            Console.WriteLine($"A média de preço dos produtos é {resultado.ToString("F2")}R$");
         }
-
     }
 }
