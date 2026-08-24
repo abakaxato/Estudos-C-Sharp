@@ -11,5 +11,10 @@ namespace OlaMundo.Classes
             x = x * 3;
             return x;
         }
+
+        public void Triplicar(int x, out int y)
+        {
+            y = x * 3;
+        }
     }
 }

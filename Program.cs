@@ -8,10 +8,14 @@ namespace OlaMundo
         {
             testes teste = new();
             int a = 10;
-
+            int b;
             teste.Triplicar(ref a);
 
             Console.WriteLine(a);
+
+            teste.Triplicar(a, out b);
+
+            Console.WriteLine(b);
 
         }
     }
