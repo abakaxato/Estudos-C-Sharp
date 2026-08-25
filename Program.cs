@@ -1,4 +1,5 @@
 ﻿using OlaMundo.Classes;
+using System.Threading.Channels;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace OlaMundo
@@ -7,20 +8,16 @@ namespace OlaMundo
     {
         static void Main(string[] args)
         {
+            Program program = new Program();
+            int resultado = program.teste();
+            Console.WriteLine(resultado);
+        }
+        public int teste()
+        {
             int x = int.Parse(Console.ReadLine());
-
-            switch (x) { 
-                case 1:
-                    Console.WriteLine("Foi digitado 1");
-                    break;
-                case 2:
-                    Console.WriteLine("foi digitado 2");
-                    break;
-                default:
-                    Console.WriteLine("foi digitado um valor diferente de 1 ou 2");
-                    break;
-            }
-
+            int y = int.Parse(Console.ReadLine());
+            int z = 0;
+            return (x > y) ? 1 : 2;
         }
     }
 }
