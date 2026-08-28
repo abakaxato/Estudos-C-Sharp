@@ -11,7 +11,7 @@ namespace OlaMundo.Classes
 
         public override string ToString()
         {
-            return $"\nID :{Id}\nMoment:{Moment}\nOrder Status : {Status}";
+            return $"\nID :{Id}\nMoment:{Moment}\nOrder Status : {Status}\n";
         }
     }
 }
