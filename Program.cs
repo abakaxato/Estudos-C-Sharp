@@ -9,9 +9,33 @@ namespace OlaMundo
     {
         static void Main(string[] args)
         {
-            DateTime dateTime = new DateTime(2026,12,12,12,12,12,12);
-            dateTime = DateTime.ParseExact("2018-12-12 13:43:56", "yyyy-MM-dd HH:mm:s", CultureInfo.InvariantCulture);
-            Console.WriteLine(dateTime);
+            DateTime dateTime = new DateTime(2016,08,27,14,12,09);
+            Console.WriteLine(dateTime.ToLongDateString());
+            DateTime dateTime2 = new DateTime(2016,08,27,14,12,09);
+            Console.WriteLine(dateTime2.ToLongTimeString());
+            DateTime dateTime3 = new DateTime(2016, 08, 27, 14, 12, 09);
+            Console.WriteLine(dateTime3.ToShortDateString());
+            DateTime dateTime4 = new DateTime(2016, 08, 27, 14, 12, 09);
+            Console.WriteLine(dateTime4.ToString("yyyy-texto-MM-dd"));
+            Console.WriteLine("--------------------------------------------");
+            DateTime dateTime5 = dateTime.AddHours(5);
+            Console.WriteLine(dateTime5);
+            DateTime dateTime6 = dateTime.AddTicks(900000000);
+            Console.WriteLine(dateTime6);
+            Console.WriteLine("--------------------------------------------");
+            TimeSpan diferenca = dateTime5.Subtract(dateTime6);
+            Console.WriteLine(diferenca);
+            TimeSpan timeSpan = new TimeSpan(13,22,14);
+            Console.WriteLine(timeSpan.Ticks);
+            Console.WriteLine(timeSpan.Hours);
+            Console.WriteLine(timeSpan);
+            Console.WriteLine("--------------------------------------------");
+            TimeSpan timeSpan1 = TimeSpan.FromDays(2,23);
+            Console.WriteLine(timeSpan1);
+            Console.WriteLine(timeSpan1.Days);
+            TimeSpan timeSpan2 = TimeSpan.FromHours(2,23);
+            Console.WriteLine(timeSpan2);
+            Console.WriteLine(timeSpan2.Days);
         }
     }
 }
