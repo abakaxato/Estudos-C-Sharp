@@ -13,7 +13,7 @@ namespace OlaMundo
             AccountBusiness accountBusines = new(4003, "Maria", 1000, 1500);
             Console.WriteLine($"\n\n{accountBusines}\n");
 
-            SavingAccount savingAccount = new(4004, "Fernando", 7000, 0.1);
+            AccountSaving savingAccount = new(4004, "Fernando", 7000, 0.1);
             Console.WriteLine($"\n\n{savingAccount}\n");
 
             account.Withdraw(5);

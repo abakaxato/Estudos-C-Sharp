@@ -4,14 +4,14 @@ using System.Text;
 
 namespace OlaMundo.Classes.Heranca
 {
-    internal class SavingAccount : Account
+    internal sealed class AccountSaving : Account
     {
         public double InterestRate { get; set; }
-        public SavingAccount()
+        public AccountSaving()
         {
 
         }
-        public SavingAccount(int number, string holder, double balance, double interestRate)
+        public AccountSaving(int number, string holder, double balance, double interestRate)
             : base(number, holder, balance)
         {
             InterestRate = interestRate;
