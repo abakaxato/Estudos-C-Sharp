@@ -1,4 +1,5 @@
-﻿using OlaMundo.Exercicios.Aula105.Models;
+﻿using OlaMundo.Classes;
+using OlaMundo.Exercicios.Aula105.Models;
 
 namespace OlaMundo
 {
@@ -6,34 +7,9 @@ namespace OlaMundo
     {
         static void Main(string[] args)
         {
-            Post post1 = new Post()
-            {
-                Moment = DateTime.Now.AddHours(-3),
-                Title = "Traveling to Bew Zeeland",
-                Content = "I'm going to visit this wonderful Country!",
-                likes = 12
-            };
-            Console.WriteLine(post1);
+          AccountBussines accountBussines = new AccountBussines(4002,"Jose",20,50);
 
-            Console.WriteLine("-----------------------------------");
-            
-            Post post2 = new Post()
-            {
-                Moment = DateTime.Today.AddHours(3),
-                Title = "Good Night Guys",
-                Content = "See you tomorrow",
-                likes = 5
-            };
-            Comment comment1 = new ("See you tommorrow brother");
-            Comment comment2 = new ("We are together");
-            Comment comment3 = new ("good night man");
-            Comment comment4 = new ("tomorrow will be crazy");
-            post2.AddComment(comment1);
-            post2.AddComment(comment2);
-            post2.AddComment(comment3);
-            post2.AddComment(comment4);
-
-            Console.WriteLine(post2);
+          Console.WriteLine(accountBussines);
         }
     }
 }

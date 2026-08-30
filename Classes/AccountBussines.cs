@@ -20,5 +20,9 @@ namespace OlaMundo.Classes
                 Balance += amount;
             }
         }
+        public override string ToString()
+        {
+            return $"Numero da conta : {Number}\nDono da conta : {Holder}\nSaldo : {Balance}R$\nLimite da conta : {LoadLimit}";
+        }
     }
 }
