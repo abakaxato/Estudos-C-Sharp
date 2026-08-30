@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Text;
 
-namespace OlaMundo.Classes
+namespace OlaMundo.Classes.Testes
 {
     internal class ContaBancaria
     {

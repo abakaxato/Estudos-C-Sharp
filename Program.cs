@@ -1,4 +1,4 @@
-﻿using OlaMundo.Classes;
+﻿using OlaMundo.Classes.Heranca;
 using OlaMundo.Exercicios.Aula105.Models;
 
 namespace OlaMundo

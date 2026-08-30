@@ -1,6 +1,6 @@
 ﻿using OlaMundo.Classes.Enums;
 
-namespace OlaMundo.Classes
+namespace OlaMundo.Classes.Testes
 {
     internal class Order
     {

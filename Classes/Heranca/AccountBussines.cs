@@ -1,6 +1,6 @@
 ﻿using static System.Runtime.InteropServices.JavaScript.JSType;
 
-namespace OlaMundo.Classes
+namespace OlaMundo.Classes.Heranca
 {
     internal class AccountBussines : Account
     {

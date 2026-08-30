@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
 
-namespace OlaMundo.Classes
+namespace OlaMundo.Classes.Testes
 {
     internal static class ConversorDeMoedas
     {

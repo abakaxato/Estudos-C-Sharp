@@ -1,4 +1,4 @@
-﻿namespace OlaMundo.Classes
+﻿namespace OlaMundo.Classes.Heranca
 {
     internal class Account
     {

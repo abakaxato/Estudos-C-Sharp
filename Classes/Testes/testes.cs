@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace OlaMundo.Classes
+namespace OlaMundo.Classes.Testes
 {
     internal class testes
     {

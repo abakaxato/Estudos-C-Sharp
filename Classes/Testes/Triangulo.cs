@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
 
-namespace OlaMundo.Objetos
+namespace OlaMundo.Classes.Testes
 {
     internal class Triangulo
     {
