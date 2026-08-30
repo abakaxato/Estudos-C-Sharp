@@ -14,5 +14,9 @@
             Holder = holder;
             Balance = balance;
         }
+        public override string ToString()
+        {
+            return $"Numero da conta : {Number}\nDono da conta : {Holder}\nSaldo : {Balance}";
+        }
     }
 }

@@ -2,13 +2,13 @@
 
 namespace OlaMundo.Classes.Heranca
 {
-    internal class AccountBussines : Account
+    internal class AccountBusiness : Account
     {
         public double LoadLimit { get; set; }
-        public AccountBussines()
+        public AccountBusiness()
         {
         }
-        public AccountBussines(int number, string holder, double balance, double loadLimit)
+        public AccountBusiness(int number, string holder, double balance, double loadLimit)
             : base(number, holder, balance)
         {
             LoadLimit = loadLimit;
