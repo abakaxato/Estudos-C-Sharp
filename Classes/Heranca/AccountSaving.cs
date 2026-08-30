@@ -29,7 +29,8 @@ namespace OlaMundo.Classes.Heranca
             base.Withdraw(amount);
             Balance -= 5;
         }
-        public override string ToString()
+        // O "sealed" é utilizado para selar os métodos overrides para que eles não sejam sobrepostos por subclasses (só pode ser usado em métodos override)
+        public sealed override string ToString()
         {
             return $"Numero da conta polpança: {Number}\nDono da conta : {Holder}\nSaldo : {Balance}R$\nTaxa de juros : {InterestRate}";
         }
