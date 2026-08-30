@@ -22,7 +22,7 @@ namespace OlaMundo.Classes.Heranca
         }
         public override string ToString()
         {
-            return $"Numero da conta : {Number}\nDono da conta : {Holder}\nSaldo : {Balance}R$\nLimite da conta : {LoadLimit}";
+            return $"Numero da conta empresarial : {Number}\nDono da conta : {Holder}\nSaldo : {Balance}R$\nLimite da conta : {LoadLimit}";
         }
     }
 }

@@ -14,9 +14,14 @@
             Holder = holder;
             Balance = balance;
         }
+        // O "virtual" é usado para identificar métodos que podem ser sobrescritos pelas subclasses
+        public virtual void Withdraw(double amount)
+        {
+            Balance -= amount + 5.0;
+        }
         public override string ToString()
         {
-            return $"Numero da conta : {Number}\nDono da conta : {Holder}\nSaldo : {Balance}";
+            return $"Numero da conta comum : {Number}\nDono da conta : {Holder}\nSaldo : {Balance}";
         }
     }
 }

@@ -21,9 +21,17 @@ namespace OlaMundo.Classes.Heranca
         {
             Balance += Balance * InterestRate;
         }
+
+        // Método sobrescrevendo o método da superclasse
+        public override void Withdraw(double amount)
+        {
+            // O "base" serve para utilizar o método que esta na superclasse
+            base.Withdraw(amount);
+            Balance -= 5;
+        }
         public override string ToString()
         {
-            return $"Numero da conta : {Number}\nDono da conta : {Holder}\nSaldo : {Balance}R$\nTaxa de juros : {InterestRate}";
+            return $"Numero da conta polpança: {Number}\nDono da conta : {Holder}\nSaldo : {Balance}R$\nTaxa de juros : {InterestRate}";
         }
     }
 }
