@@ -1,0 +1,20 @@
+string sourcePath = @"C:\temp\Arquivo1.txt";
+            string targetPath = @"C:\temp\Arquivo2.txt";
+
+            try 
+            {
+                //usando o "FileInfo" é guardado o caminho do arquivo dentro da variavel
+                FileInfo fileInfo = new(sourcePath);
+                //fileInfo.CopyTo(targetPath); comentando pra não quebrar e entrar no catch
+                
+                //usando o "File" não precisa ter estanciado o objeto por que os métodos são estaticos,
+                //mas vai ser feita uma validção a cada uso e tem que especificar o caminho
+                string[] lines = File.ReadAllLines(sourcePath);
+                foreach (string linha in lines) 
+                {
+                    Console.WriteLine(linha);
+                }
+            } catch (IOException e)
+            {
+                Console.WriteLine($"Ocorru um erro : {e.Message}");
+            }

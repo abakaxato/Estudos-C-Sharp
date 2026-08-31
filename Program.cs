@@ -5,24 +5,38 @@
         static void Main(string[] args)
         {
             string sourcePath = @"C:\temp\Arquivo1.txt";
-            string targetPath = @"C:\temp\Arquivo2.txt";
-
-            try 
+            FileStream fileStream = null;
+            StreamReader streamReader = null;
+            try
             {
-                //usando o "FileInfo" é guardado o caminho do arquivo dentro da variavel
-                FileInfo fileInfo = new(sourcePath);
-                //fileInfo.CopyTo(targetPath); comentando pra não quebrar e entrar no catch
+                //instanciando o stream de arquivos generico e depois especificando a leitura instanciando outro objeto
+                fileStream = new FileStream(sourcePath, FileMode.Open);
+                streamReader = new StreamReader(fileStream);
+
+                //Modo de instanciar o stream reader sem precisar do fileStream...
+                //streamReader = File.OpenText(sourcePath);
                 
-                //usando o "File" não precisa ter estanciado o objeto por que os métodos são estaticos,
-                //mas vai ser feita uma validção a cada uso e tem que especificar o caminho
-                string[] lines = File.ReadAllLines(sourcePath);
-                foreach (string linha in lines) 
+                //usando o final do stream para percorrer no while
+                while (!streamReader.EndOfStream)
                 {
-                    Console.WriteLine(linha);
+                    string line = streamReader.ReadLine();
+                    Console.WriteLine(line);
                 }
-            } catch (IOException e)
+            }
+            catch (IOException e)
             {
                 Console.WriteLine($"Ocorru um erro : {e.Message}");
+            }
+            finally 
+            {
+                if (fileStream is not null) 
+                {
+                    fileStream.Close();
+                }
+                if (streamReader is not null)
+                {
+                    streamReader.Close();
+                }
             }
 
         }
