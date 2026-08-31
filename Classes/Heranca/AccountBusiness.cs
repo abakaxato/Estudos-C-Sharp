@@ -8,8 +8,8 @@ namespace OlaMundo.Classes.Heranca
         public AccountBusiness()
         {
         }
-        public AccountBusiness(int number, string holder, double balance, double loadLimit)
-            : base(number, holder, balance)
+        public AccountBusiness(int number, string holder, double balance, double loadLimit, double withdrawlLimit)
+            : base(number, holder, balance, withdrawlLimit)
         {
             LoadLimit = loadLimit;
         }
@@ -22,7 +22,7 @@ namespace OlaMundo.Classes.Heranca
         }
         public override string ToString()
         {
-            return $"Numero da conta empresarial : {Number}\nDono da conta : {Holder}\nSaldo : {Balance}R$\nLimite da conta : {LoadLimit}";
+            return $"Numero da conta empresarial : {Number}\nDono da conta : {Holder}\nSaldo : {Balance}R$\nLimite da conta para emprestimos: {LoadLimit}\nLimite da conta para saque {WithdrawLimit}\n";
         }
     }
 }

@@ -11,8 +11,8 @@ namespace OlaMundo.Classes.Heranca
         {
 
         }
-        public AccountSaving(int number, string holder, double balance, double interestRate)
-            : base(number, holder, balance)
+        public AccountSaving(int number, string holder, double balance, double interestRate, double withdrawlLimit)
+            : base(number, holder, balance, withdrawlLimit)
         {
             InterestRate = interestRate;
         }
