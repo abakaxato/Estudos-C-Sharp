@@ -1,5 +1,5 @@
-﻿using OlaMundo.Classes.Heranca;
-using OlaMundo.Exercicios.Aula105.Models;
+﻿using OlaMundo.Exercicios.Aula116;
+using System.Globalization;
 
 namespace OlaMundo
 {
@@ -7,21 +7,46 @@ namespace OlaMundo
     {
         static void Main(string[] args)
         {
-            Account account = new(4002, "Jose", 200);
-            Console.WriteLine($"\n\n{account}\n");
-
-            AccountBusiness accountBusines = new(4003, "Maria", 1000, 1500);
-            Console.WriteLine($"\n\n{accountBusines}\n");
-
-            AccountSaving savingAccount = new(4004, "Fernando", 7000, 0.1);
-            Console.WriteLine($"\n\n{savingAccount}\n");
-
-            account.Withdraw(5);
-            Console.WriteLine($"\n\n{account}\n");
-
-            savingAccount.Withdraw(5);
-            Console.WriteLine($"\n\n{savingAccount}\n");
-
+            Console.Write("Enter the number of products : ");
+            int n = int.Parse(Console.ReadLine());
+            List<Product> products = new();
+            for (int i = 1; i <= n; i++)
+            {
+                Console.WriteLine($"Product #{i} data :");
+                Console.Write("Common, used or imported (c/u/i)? ");
+                string std = Console.ReadLine();
+                Console.Write("Name : ");
+                string name = Console.ReadLine();
+                Console.Write("Price : ");
+                double price = double.Parse(Console.ReadLine());
+                switch (std)
+                {
+                    case "c":
+                        Product productCommon = new(name,price);
+                        products.Add(productCommon);
+                        break;
+                    case "u":
+                        Console.Write("Manufacture Date (DD/MM/YYY): ");
+                        DateTime date = DateTime.ParseExact(Console.ReadLine(),"dd/MM/yyyy",CultureInfo.InvariantCulture);
+                        Product productUsed = new ProductUsed(name, price,date);
+                        products.Add(productUsed);
+                        break;
+                    case "i":
+                        Console.Write("Custom Fee: ");
+                        double customFee = double.Parse(Console.ReadLine(),CultureInfo.InvariantCulture);
+                        Product productImported = new ProductImported(name, price,customFee);
+                        products.Add(productImported);
+                        break;
+                    default:
+                            Console.WriteLine("Valor não reconhecido");
+                        break;
+                }
+            }
+            Console.WriteLine("\nPRICE TAGS:");
+            foreach (Product product in products)
+            {
+                Console.WriteLine("\n" + product.PriceTag());
+            }
         }
     }
 }
