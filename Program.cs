@@ -6,7 +6,7 @@ namespace OlaMundo
     {
         static void Main(string[] args)
         {
-            S
+            
         }
     }
 }
