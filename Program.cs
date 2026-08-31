@@ -1,5 +1,4 @@
-﻿using OlaMundo.Exercicios.Aula116;
-using System.Globalization;
+﻿using OlaMundo.Classes.Heranca;
 
 namespace OlaMundo
 {
@@ -7,46 +6,56 @@ namespace OlaMundo
     {
         static void Main(string[] args)
         {
-            Console.Write("Enter the number of products : ");
-            int n = int.Parse(Console.ReadLine());
-            List<Product> products = new();
-            for (int i = 1; i <= n; i++)
+            Account account = new(4002, "Jose", 20);
+
+            AccountBusiness accountBussines = new(4003, "Maria", 1000, 1500);
+
+            Console.WriteLine("\n\nConta \n" + account);
+
+            Console.WriteLine("\n\nConta empresarial \n" + accountBussines);
+
+            //UPCASTING
+            Account upConta1 = accountBussines;
+            Console.WriteLine("\n\nConta comum puxando a empresarial \n" + upConta1);
+
+            Account upConta2 = new AccountBusiness(1234, "Paulo", 5000, 15000);
+            Console.WriteLine("\n\nConta comum criada a partir da empresarial \n" + upConta2);
+
+            Account upConta3 = new AccountSaving(54, "Fernando", 7000, 0.1);
+            Console.WriteLine("\n\nConta comum criada a partir da taxa de juros \n" + upConta3);
+
+            //DOWNCASTING
+
+            AccountBusiness downConta1 = (AccountBusiness)upConta2; // Tem que deixar claro que a variavel é uma bussiness, já que ela foi criada como conta comum  ela é vista primeiramente como conta comum
+            downConta1.Loan(20);
+            Console.WriteLine("\n\nConta empresarial criada a partir de uma conta comum que foi criada a partir de uma empresarial : \n" + downConta1);
+
+            //Validando antes de converter
             {
-                Console.WriteLine($"Product #{i} data :");
-                Console.Write("Common, used or imported (c/u/i)? ");
-                string std = Console.ReadLine();
-                Console.Write("Name : ");
-                string name = Console.ReadLine();
-                Console.Write("Price : ");
-                double price = double.Parse(Console.ReadLine());
-                switch (std)
+                try
+                {                                                              // O downConta2 vai ser criado como Business tentando usar o upConta3, mas o upConta3 é Saving com "exibição" da variavel de conta comum
+                    AccountBusiness downConta2 = (AccountBusiness)upConta3; // Vai dar erro, o compilador sabe que a variavel base é compativel com o bussines, mas não sabe que o valor que foi criado dentro da variavel é um valor diferente
+                }
+                catch (Exception e)
                 {
-                    case "c":
-                        Product productCommon = new(name,price);
-                        products.Add(productCommon);
-                        break;
-                    case "u":
-                        Console.Write("Manufacture Date (DD/MM/YYY): ");
-                        DateTime date = DateTime.ParseExact(Console.ReadLine(),"dd/MM/yyyy",CultureInfo.InvariantCulture);
-                        Product productUsed = new ProductUsed(name, price,date);
-                        products.Add(productUsed);
-                        break;
-                    case "i":
-                        Console.Write("Custom Fee: ");
-                        double customFee = double.Parse(Console.ReadLine(),CultureInfo.InvariantCulture);
-                        Product productImported = new ProductImported(name, price,customFee);
-                        products.Add(productImported);
-                        break;
-                    default:
-                            Console.WriteLine("Valor não reconhecido");
-                        break;
+                    Console.WriteLine("\nSó pra mostrar o erro : \n" + e.Message);
+                }
+
+                if (upConta3 is AccountBusiness) // Maneira correta de validar se a variavel é do tipo certo antes de converter
+                {
+                    AccountBusiness downConta2 = (AccountBusiness)upConta3;
+                }
+
+                if (upConta3 is AccountSaving) // Convertendo com o tipo correto
+                {
+                    AccountSaving downConta2 = (AccountSaving)upConta3;
+                    //Poderia ser assim :
+                    //SavingAccount downConta2 = upConta3 as SavingAccount;
+                    downConta2.UpdateBalance();
+                    Console.WriteLine("\nConta criada usando a conversão correta e utilizando o método update : \n" + downConta2);
                 }
             }
-            Console.WriteLine("\nPRICE TAGS:");
-            foreach (Product product in products)
-            {
-                Console.WriteLine("\n" + product.PriceTag());
-            }
+
         }
     }
 }

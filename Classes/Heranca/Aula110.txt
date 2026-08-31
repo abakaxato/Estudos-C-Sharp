@@ -1,4 +1,4 @@
-﻿ Account account = new(4002, "Jose", 20);
+﻿Account account = new(4002, "Jose", 20);
 
             AccountBusiness accountBussines = new(4003, "Maria", 1000, 1500);
 
@@ -10,19 +10,19 @@
             Account upConta1 = accountBussines;
             Console.WriteLine("\n\nConta comum puxando a empresarial \n" + upConta1);
 
-            Account upConta2 = new AccountBusiness(1234,"Paulo",5000,15000);
+            Account upConta2 = new AccountBusiness(1234, "Paulo", 5000, 15000);
             Console.WriteLine("\n\nConta comum criada a partir da empresarial \n" + upConta2);
 
-            Account upConta3 = new SavingAccount(54,"Fernando",7000,0.1);
+            Account upConta3 = new AccountSaving(54, "Fernando", 7000, 0.1);
             Console.WriteLine("\n\nConta comum criada a partir da taxa de juros \n" + upConta3);
 
             //DOWNCASTING
-            
+
             AccountBusiness downConta1 = (AccountBusiness)upConta2; // Tem que deixar claro que a variavel é uma bussiness, já que ela foi criada como conta comum  ela é vista primeiramente como conta comum
             downConta1.Loan(20);
             Console.WriteLine("\n\nConta empresarial criada a partir de uma conta comum que foi criada a partir de uma empresarial : \n" + downConta1);
-            
-                //Validando antes de converter
+
+            //Validando antes de converter
             {
                 try
                 {                                                              // O downConta2 vai ser criado como Business tentando usar o upConta3, mas o upConta3 é Saving com "exibição" da variavel de conta comum
@@ -38,9 +38,9 @@
                     AccountBusiness downConta2 = (AccountBusiness)upConta3;
                 }
 
-                if (upConta3 is SavingAccount) // Convertendo com o tipo correto
+                if (upConta3 is AccountSaving) // Convertendo com o tipo correto
                 {
-                    SavingAccount downConta2 = (SavingAccount)upConta3;
+                    AccountSaving downConta2 = (AccountSaving)upConta3;
                     //Poderia ser assim :
                     //SavingAccount downConta2 = upConta3 as SavingAccount;
                     downConta2.UpdateBalance();
