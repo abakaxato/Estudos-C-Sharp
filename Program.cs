@@ -5,42 +5,23 @@
         static void Main(string[] args)
         {
             string sourcePath = @"C:\temp\Arquivo1.txt";
-            //Lendo o arquivo fazendo 2 instanciações uma para ativar a stream do arquivo e outra para ativar a leitura
+            string targetPath = @"C:\temp\Arquivo2.txt";
             try
             {
-                using (FileStream fs = new(sourcePath, FileMode.Open))
+                string[] lines = File.ReadAllLines(sourcePath);
+                using StreamWriter sw = File.AppendText(targetPath);
+                foreach(string line in lines)
                 {
-                    using (StreamReader sr = new(fs))
-                    {
-                        while (!sr.EndOfStream)
-                        {
-                            string linha = sr.ReadLine();
-                            Console.WriteLine(linha);
-                        }
-                    }
+                    sw.WriteLine(line.ToUpper());
                 }
-            }catch(IOException e) 
+            }
+            catch (IOException e)
             {
                 Console.WriteLine($"Ocorreu um erro : \n{e.Message}");
             }
-            
-            Console.WriteLine("--------------------------------------------------");
 
-            //Lendo o arquivo fazendo apenas 1 instanciação utilizando o File para ler o arquivo diretamente
-            try
-            {
-                using (StreamReader fs = File.OpenText(sourcePath))
-                {
-                    while (!fs.EndOfStream)
-                    {
-                        string linha = fs.ReadLine();
-                        Console.WriteLine(linha);
-                    }
-                }
-            }catch(IOException e) 
-            {
-                Console.WriteLine($"Ocorreu um erro : \n{e.Message}");
-            }
+
+            
         }
     }
 }
