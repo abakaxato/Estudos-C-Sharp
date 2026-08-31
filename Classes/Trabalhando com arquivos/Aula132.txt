@@ -1,0 +1,34 @@
+string sourcePath = @"C:\temp\Arquivo1.txt";
+            FileStream fileStream = null;
+            StreamReader streamReader = null;
+            try
+            {
+                //instanciando o stream de arquivos generico e depois especificando a leitura instanciando outro objeto
+                //fileStream = new FileStream(sourcePath, FileMode.Open);
+                streamReader = new StreamReader(fileStream);
+
+                //Modo de instanciar o stream reader sem precisar do fileStream...
+                //streamReader = File.OpenText(sourcePath);
+                
+                //usando o final do stream para percorrer no while
+                while (!streamReader.EndOfStream)
+                {
+                    string line = streamReader.ReadLine();
+                    Console.WriteLine(line);
+                }
+            }
+            catch (IOException e)
+            {
+                Console.WriteLine($"Ocorru um erro : {e.Message}");
+            }
+            finally 
+            {
+                if (fileStream is not null) 
+                {
+                    fileStream.Close();
+                }
+                if (streamReader is not null)
+                {
+                    streamReader.Close();
+                }
+            }

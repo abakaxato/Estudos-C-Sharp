@@ -5,40 +5,42 @@
         static void Main(string[] args)
         {
             string sourcePath = @"C:\temp\Arquivo1.txt";
-            FileStream fileStream = null;
-            StreamReader streamReader = null;
+            //Lendo o arquivo fazendo 2 instanciações uma para ativar a stream do arquivo e outra para ativar a leitura
             try
             {
-                //instanciando o stream de arquivos generico e depois especificando a leitura instanciando outro objeto
-                fileStream = new FileStream(sourcePath, FileMode.Open);
-                streamReader = new StreamReader(fileStream);
-
-                //Modo de instanciar o stream reader sem precisar do fileStream...
-                //streamReader = File.OpenText(sourcePath);
-                
-                //usando o final do stream para percorrer no while
-                while (!streamReader.EndOfStream)
+                using (FileStream fs = new(sourcePath, FileMode.Open))
                 {
-                    string line = streamReader.ReadLine();
-                    Console.WriteLine(line);
+                    using (StreamReader sr = new(fs))
+                    {
+                        while (!sr.EndOfStream)
+                        {
+                            string linha = sr.ReadLine();
+                            Console.WriteLine(linha);
+                        }
+                    }
                 }
-            }
-            catch (IOException e)
+            }catch(IOException e) 
             {
-                Console.WriteLine($"Ocorru um erro : {e.Message}");
+                Console.WriteLine($"Ocorreu um erro : \n{e.Message}");
             }
-            finally 
-            {
-                if (fileStream is not null) 
-                {
-                    fileStream.Close();
-                }
-                if (streamReader is not null)
-                {
-                    streamReader.Close();
-                }
-            }
+            
+            Console.WriteLine("--------------------------------------------------");
 
+            //Lendo o arquivo fazendo apenas 1 instanciação utilizando o File para ler o arquivo diretamente
+            try
+            {
+                using (StreamReader fs = File.OpenText(sourcePath))
+                {
+                    while (!fs.EndOfStream)
+                    {
+                        string linha = fs.ReadLine();
+                        Console.WriteLine(linha);
+                    }
+                }
+            }catch(IOException e) 
+            {
+                Console.WriteLine($"Ocorreu um erro : \n{e.Message}");
+            }
         }
     }
 }
