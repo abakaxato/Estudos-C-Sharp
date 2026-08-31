@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Text;
 
 namespace OlaMundo.Exercicios.Aula120
@@ -12,6 +13,10 @@ namespace OlaMundo.Exercicios.Aula120
         protected double Imposto { get; set; }
         public abstract double CalcularImposto();
         public abstract void PagarImposto();
+        public override string ToString()
+        {
+            return $"\nName : {Nome}\nTax : R${Imposto.ToString("F2",CultureInfo.InvariantCulture)}";
+        }
         
     }
 }
