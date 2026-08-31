@@ -1,35 +1,29 @@
-﻿using OlaMundo.Classes.Heranca;
-using OlaMundo.Exercicios.Aula120;
-
-namespace OlaMundo
+﻿namespace OlaMundo
 {
     internal class Program
     {
         static void Main(string[] args)
         {
-            Account account = new AccountBusiness(1, "joão", 1500, 5000, 3000);
-            Account account2 = new AccountBusiness(2, "maria", 3500, 6000, 4000);
-            Account account3 = new AccountBusiness(3, "paulo", 0, 67000, 180000);
-            Console.WriteLine(account);
-            Console.WriteLine(account2);
-            Console.WriteLine(account3);
+            string sourcePath = @"C:\temp\Arquivo1.txt";
+            string targetPath = @"C:\temp\Arquivo2.txt";
 
-            Console.WriteLine("---------------------------------------------------------");
-
-            Console.Write("\nDigite o valor para sacar da conta 1 : ");
-            account.Withdraw(double.Parse(Console.ReadLine()));
-            
-            Console.Write("\nDigite o valor para sacar da conta 2 : ");
-            account2.Withdraw(double.Parse(Console.ReadLine()));
-
-            Console.Write("\nDigite o valor para sacar da conta 3 : ");
-            account3.Withdraw(double.Parse(Console.ReadLine()));
-
-            Console.WriteLine("---------------------------------------------------------");
-
-            Console.WriteLine(account);
-            Console.WriteLine(account2);
-            Console.WriteLine(account3);
+            try 
+            {
+                //usando o "FileInfo" é guardado o caminho do arquivo dentro da variavel
+                FileInfo fileInfo = new(sourcePath);
+                //fileInfo.CopyTo(targetPath); comentando pra não quebrar e entrar no catch
+                
+                //usando o "File" não precisa ter estanciado o objeto por que os métodos são estaticos,
+                //mas vai ser feita uma validção a cada uso e tem que especificar o caminho
+                string[] lines = File.ReadAllLines(sourcePath);
+                foreach (string linha in lines) 
+                {
+                    Console.WriteLine(linha);
+                }
+            } catch (IOException e)
+            {
+                Console.WriteLine($"Ocorru um erro : {e.Message}");
+            }
 
         }
     }
