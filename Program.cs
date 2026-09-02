@@ -1,18 +1,55 @@
-﻿namespace OlaMundo
+﻿using System.Data.SqlTypes;
+using System.Security.AccessControl;
+
+namespace OlaMundo
 {
     internal class Program
     {
         static void Main(string[] args)
         {
-            string sourcePath = @"C:\temp\Arquivo1.txt";
-            string targetPath = @"C:\temp\Arquivo2.txt";
+            string sourcePath = @"C:\temp";
+
             try
             {
-                string[] lines = File.ReadAllLines(sourcePath);
-                using StreamWriter sw = File.AppendText(targetPath);
-                foreach(string line in lines)
+                //Usando o Directory (classe que tem métodos estativos que não precisam ser instanciados para serem usados)
                 {
-                    sw.WriteLine(line.ToUpper());
+                    //Listando pastas em um diretorio
+                    //poderia usar 'var' se eu não soubesse o tipo de retorno para variavel
+                    //A clase não precisa ser instanciada, pode ser utilizado o método direto e associado a uma variavel
+                    IEnumerable<string> folders = Directory.EnumerateDirectories(sourcePath, "*.*", SearchOption.AllDirectories);
+                    foreach (string item in folders)
+                    {
+                        Console.WriteLine(item);
+                    }
+                    //Listando arquivos em um diretorio
+                    var files = Directory.EnumerateFiles(sourcePath, "*.*", SearchOption.AllDirectories);
+                    foreach (string item in files)
+                    {
+                        Console.WriteLine(item);
+                    }
+                    //Criando uma nova pasta em um diretorio parametrizado
+                    Directory.CreateDirectory(sourcePath + "\\Pasta Criada");
+                }
+                Console.WriteLine("------------------------------------------------------------");
+                //Usando a classe Directory info (ela tem que ser instanciada, mas é mais rapida)
+                {
+                    //A classe já é instanciada usando um path especifico
+                    DirectoryInfo directoryInfo = new(sourcePath);
+                    //Listando pastas em um diretorio
+                    IEnumerable<DirectoryInfo> enumerable = directoryInfo.EnumerateDirectories("*.*",SearchOption.AllDirectories);
+                    foreach (var item in enumerable) 
+                    {
+                        Console.WriteLine(item);
+                    }
+                    var enumeable2 = directoryInfo.EnumerateFiles("*.txt*",SearchOption.AllDirectories);
+                    //Listando arquivos em um diretorio
+                    foreach (var item in enumeable2)
+                    {
+                        Console.WriteLine(item);
+                    }
+                    //Criando uma nova pasta em um diretorio que foi associado a instanciação
+                    DirectoryInfo directoryInfo2 = new(sourcePath+@"\Pasta criada usando directoryInfo");
+                    directoryInfo2.Create();
                 }
             }
             catch (IOException e)
