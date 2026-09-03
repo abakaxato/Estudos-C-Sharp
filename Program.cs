@@ -1,5 +1,27 @@
-﻿using System.Data.SqlTypes;
-using System.Security.AccessControl;
+﻿//Exercicio da aula 137
+
+
+#region Enunciado da questao
+        /*
+        Fazer um programa para ler o caminho de um arquivo .csv contendo os dados de itens vendidos.
+        Cada item possui um nome, preço unitário e quantidade, separados por vírgula.
+        Você deve gerar um novo arquivo chamado "summary.csv",
+        localizado em uma subpasta chamada "out" a partir da pasta original do arquivo de origem,
+        contendo apenas o nome e o valor total para aquele item (preço unitário multiplicado pela quantidade)
+        */
+#endregion Enunciado da questao
+
+
+#region arquivo.csv
+        /*
+        TV,1200.0,2
+        Mouse,50.0,10
+        Teclado,150.0,5
+        Monitor,800.0,3
+        Cadeira Gamer,500.0,4
+        */
+#endregion
+
 
 namespace OlaMundo
 {
@@ -7,20 +29,135 @@ namespace OlaMundo
     {
         static void Main(string[] args)
         {
-            string sourcePath = @"C:\temp\pasta com arquivos\subpasta com arquivos\arquivo1.txt";
 
-            //Estudando a classe Path
+            
+
+            try
             {
-                //Metodo para puxar o path completo de um path parcial
-                Console.WriteLine("GetFullPath : " + Path.GetFullPath(sourcePath));
-                //Metodo para puxar apenas o path
-                Console.WriteLine("GetDirectoryName : " + Path.GetDirectoryName(sourcePath));
-                //Metodo para puxar o nome do arquivo sem a extensão do arquivo
-                Console.WriteLine("GetFileNameWithoutExtension : " + Path.GetFileNameWithoutExtension(sourcePath));
-                //Metodo para puxar a extensão do arquivo
-                Console.WriteLine("GetExtension : " + Path.GetExtension(sourcePath));
-                //Metodo para puxar a pasta temporaria do meu sistema atual
-                Console.WriteLine("GetTempFileName : " + Path.GetTempFileName());
+                string sourcePath = string.Empty;
+                string sourcePath2 = string.Empty;
+
+                #region Criando Diretorios
+                try
+                {
+                    sourcePath = @"C:\temp\itens.csv";
+                    Directory.CreateDirectory(Path.GetDirectoryName(sourcePath));
+                    sourcePath2 = @"C:\temp\out\itens2.csv";
+                    Directory.CreateDirectory(Path.GetDirectoryName(sourcePath2));
+                }
+                catch (IOException e) {
+                    if (e.Message == @"Cannot create 'C:\temp\itens.csv' because a file or directory with the same name already exists." ||
+                        e.Message == @"Cannot create 'C:\temp\out\itens2.csv' because a file or directory with the same name already exists.")
+                    {
+                        Console.WriteLine("Diretorios já existentes, não foi necessaria a criação");
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Ocorreu um erro : \n{e.Message}");
+                        throw e;
+                    }
+                }
+                #endregion Criando Diretorios
+
+                #region Criando primeiro arquivo
+                List<string> arquivo1 = new();
+                arquivo1.Add("TV,1200.0,2");
+                arquivo1.Add("Mouse,50.0,10");
+                arquivo1.Add("Teclado,150.0,5");
+                arquivo1.Add("Monitor,800.0,3");
+                arquivo1.Add("Cadeira Gamer,500.0,4");
+                using (StreamWriter streamWriter = new StreamWriter(sourcePath))
+                {
+                    foreach (var item in arquivo1)
+                    {
+                        streamWriter.WriteLine(item);
+                    }
+                }
+                #endregion Criando primeiro arquivo
+
+                #region Lendo o arquivo antigo (Primeiro arquivo)
+
+                //Criado variavel que vai guardar as linhas
+                List<string> linhas = new();
+                //Colocando o "using" para matar o StramReader assim que acabar a sua utilização
+                    //intanciando o StreamReader em um arquivo diretamente utilizando o método da classe estatica File
+                using (StreamReader streamReader = File.OpenText(sourcePath))
+                {
+                    //Enquanto ainda não acabar o stream o while continua
+                    while (!streamReader.EndOfStream) 
+                    {
+                        //Lendo linha a linha do StreamReader que no caso é um txt, ao final das linhas finaliza o streamReader
+                            //Adicionei uma virgula "," ao final de cada linha para conseguir separar as linhas
+                        linhas.Add(streamReader.ReadLine()+",");
+                    }
+                }
+                Console.WriteLine("\nItens : \n");
+
+                //Criando uma variavel para guardar os valores de varias linhas em uma unica string
+                string concatenacao = "";
+                foreach (var item in linhas)
+                {
+                    Console.WriteLine(item);
+                    concatenacao += item;
+                }
+                #endregion
+
+                #region Tratando os dados e criando o novo arquivo
+
+                //Inserindo os valores de cada texto antes de "," em uma posição do vetor
+                //vai ficar sobrando um "," no final da ultima linha 
+                string[] divisao = concatenacao.Split(",");
+                
+                //Criando uma variavel que vai ser responsavel por guardar os novos valores
+                List<string> novasLinhas = new();
+                 
+                double total = 0;
+
+                //Fazendo o laço for pular de 3 em 3, já que o primeiro campo das linhas é o item e as 2 ultimas são o valor e a quantidade
+                    //Isso é pra poder utilizar o segundo e terceiro valor de cada linha sempre considerando que o primeiro campo é o item
+                for (int i = 0; i < divisao.Length; i+=3)
+                {
+                    //fiz um if aqui só pra a aplicação não tentar usar os 3 ultimos campos que vão ser o valor, a quantidade e uma "," no final
+                    if (i < (divisao.Length - 3))
+                    {
+                        total = double.Parse(divisao[i + 1]) * double.Parse(divisao[i + 2]);
+                        novasLinhas.Add($"{divisao[i]},{total}");
+                    }
+                }
+
+                //Escrevendo os dados no novo arquivo
+                using (StreamWriter streamWriter = new StreamWriter(sourcePath2))
+                {
+
+                    foreach (var item in novasLinhas)
+                    {
+                        streamWriter.WriteLine(item);
+                    }
+                }
+                Console.WriteLine("----------------------------------");
+                #endregion
+
+                #region Lendo o novo arquivo
+                linhas.Clear();
+                {
+                    using (StreamReader streamReader = File.OpenText(sourcePath2))
+                    {
+                        while (!streamReader.EndOfStream)
+                        {
+                            linhas.Add(streamReader.ReadLine());
+                        }
+                    }
+                    Console.WriteLine("\nTotalização : \n");
+                    foreach (var item in linhas)
+                    {
+                        Console.WriteLine(item);
+                    }
+                }
+                #endregion
+            }
+            catch (Exception e) 
+            {
+                Console.WriteLine("Ocorreu um erro : " + e.Message);
             }
         }
     }
