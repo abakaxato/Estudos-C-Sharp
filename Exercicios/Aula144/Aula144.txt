@@ -1,0 +1,38 @@
+Console.Write("How many contracts do you want register ? ");
+
+            int numberOfContracts = int.Parse(Console.ReadLine());
+            
+            List<IContractService> contracts = new();
+
+            for (int i = 1; i <= numberOfContracts; i++)
+            {
+                try
+                {
+                    if (i != 1) Console.WriteLine("\nNext Contract\n");
+                    Console.Write("Enter contract data\nNumber :");
+                    int number = int.Parse(Console.ReadLine());
+                    Console.Write("Enter contract initial Date (dd/MM/yyyy):");
+                    DateTime date = DateTime.ParseExact(Console.ReadLine(), "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                    Console.Write("Enter contract total value :");
+                    double contractValue = double.Parse(Console.ReadLine());
+
+                    ContractService contract = new ContractService(number, date, contractValue);
+                    Console.Write("Enter number of installments : ");
+                    int numberOfintallments = int.Parse(Console.ReadLine());
+                    contract.CalcInstallments(numberOfintallments);
+                    contracts.Add(contract);
+                    
+                }
+                catch (FormatException formatError) 
+                {
+                    Console.WriteLine($"you entered the date in the wrong format : {formatError.Message}");                }
+                catch (Exception e)
+                {
+                    Console.WriteLine($"something was error : {e.Message}");
+                }
+            }
+
+            foreach (IContractService contract in contracts)
+            {
+                Console.WriteLine("\n"+contract.ToString());
+            }
