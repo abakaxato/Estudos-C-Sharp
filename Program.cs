@@ -20,63 +20,92 @@ namespace OlaMundo
     {
         static void Main(string[] args)
         {
-            //Equals
+            //Criando um conjunto hashSet
+
+            Console.WriteLine("Criando um conjunto hashSet");
+            HashSet<String> conjuntoHashSet = new();
+            //Adicionando valores
+            conjuntoHashSet.Add("Televisão");
+            conjuntoHashSet.Add("Notebook");
+            conjuntoHashSet.Add("Video game");
+            conjuntoHashSet.Add("Computador");
+
+            //Verificando se existe o valor selecionado dentro do conjunto
+            Console.WriteLine(conjuntoHashSet.Contains("Televisão"));
+
+            //percorrendo o conjunto
+            foreach (string produtos in conjuntoHashSet)
             {
-                string a = "Maria";
-                string b = "Maria";
-                string c = "joao";
-                Console.WriteLine($"{a} {b} {c}");
-                //Validando que o "a" é igual ao "b" usando equals
-                Console.WriteLine(a.Equals(b));
-                //Validando que o "a" é diferente do "c" usando equals
-                Console.WriteLine(a.Equals(c));
+                Console.WriteLine(produtos);
             }
-            Console.WriteLine("----------------------------------------------");
-            //HashCode
+
+            Console.WriteLine("--------------------------------------");
+
+            Console.WriteLine("Criando o segundo conjunto hashSet");
+            HashSet<string> conjuntoHashSet2 = new(conjuntoHashSet);
+            Console.WriteLine("Percorrendo o segundo conjunto criado a partir do primeiro");
+            foreach (string produtos in conjuntoHashSet2)
             {
-                string d = "fernando";
-                string e = "fernando";
-                string f = "ana";
-                Console.WriteLine($"{d} {d.GetHashCode()} {e} {e.GetHashCode()} {f} {f.GetHashCode()}");
-                //Validando que o "d" é igual ao "e" usando hashCode
-                Console.WriteLine(d.GetHashCode() == e.GetHashCode());
-                //Validando que o "d" é diferente do "f" usando hashCode
-                Console.WriteLine(d.GetHashCode() == f.GetHashCode());
+                Console.WriteLine(produtos);
             }
-            Console.WriteLine("----------------------------------------------");
-            //Testando equals e hashCode personalizados
-            Materia areiaBranca = new()
-            {
-                Cor = "Branca",
-                Peso = 0.01,
-                Nome = "Areia"
-            };
-            Console.WriteLine(areiaBranca.ToString());
 
-            Materia areiaMarrom = new()
-            {
-                Cor = "Marrom",
-                Peso = 0.01,
-                Nome = "Areia"
-            };
-            Console.WriteLine(areiaMarrom.ToString());
+            Console.WriteLine("--------------------------------------");
 
-            Materia lamaMarrom = new()
-            {
-                Cor = "Marrom",
-                Peso = 0.50,
-                Nome = "Lama Marrom"
-            };
-            Console.WriteLine(lamaMarrom.ToString());
-            Console.WriteLine("----------------------------------------------");
-            Console.WriteLine("Testando se a areia branca é igual a areia marrom usando o equals (Nome e Peso)");
-            Console.WriteLine(areiaBranca.Equals(areiaMarrom));
-            Console.WriteLine("Testando se a lama marrom é igual a areia marrom usando o equals (Nome e Peso)");
-            Console.WriteLine(lamaMarrom.Equals(areiaMarrom));
-            Console.WriteLine("Testando se a lama marrom é igual a areia marrom usando o cashCode (hashCode da cor)");
-            Console.WriteLine("hash Code da lama marrom : " + lamaMarrom.GetHashCode());
-            Console.WriteLine(lamaMarrom.GetHashCode() == areiaMarrom.GetHashCode());
+            //Criando um conjunto SortedSet
+            Console.WriteLine("Criando um conjunto SortedSet");
 
+            SortedSet<String> conjuntoSortedSet = new();
+            //Adicionando valores
+            conjuntoSortedSet.Add("Cadeira");
+            conjuntoSortedSet.Add("Sofa");
+            conjuntoSortedSet.Add("Poltrona");
+            conjuntoSortedSet.Add("Banco");
+            conjuntoSortedSet.Add("Computador");
+
+            //Verificando se existe o valor selecionado dentro do conjunto
+            Console.WriteLine(conjuntoSortedSet.Contains("Poltrona"));
+
+            //percorrendo o conjunto
+            foreach (string produtos in conjuntoSortedSet)
+            {
+                Console.WriteLine(produtos);
+            }
+
+            //Fazendo a união de conjuntos (insere apenas os valores que existem em um mas não no outro)
+            //Fiz a união de 2 conjuntos diferentes, o hash agr tem os valores do sorted dentro dele
+            Console.WriteLine("--------------------------------------");
+
+            Console.WriteLine("Fazendo a união de 2 conjuntos, um HashSet e outro SortedSet dentro de um HashSet");
+            conjuntoHashSet.UnionWith(conjuntoSortedSet);
+
+            foreach (string produtos in conjuntoHashSet)
+            {
+                Console.WriteLine(produtos);
+            }
+
+            //Fazendo a interseção de conjuntos (Deixa apenas os valores que existem nos 2 conjuntos)
+            //Fiz a interseção de 2 conjuntos diferentes, o sorted agr tem os apenas os valores que também existiam no hash
+            Console.WriteLine("--------------------------------------");
+
+            Console.WriteLine("Fazendo a interseção de 2 conjuntos, um HashSet e outro SortedSet dentro de um SortedSet");
+            conjuntoSortedSet.IntersectWith(conjuntoHashSet2);
+
+            foreach (string produtos in conjuntoSortedSet)
+            {
+                Console.WriteLine(produtos);
+            }
+
+            //Fazendo a diferença de conjuntos (Deixa apenas os valores que existem no primeiro conjunto retirando os que também aparecem no segundo conjunto)
+            //Fiz a diferença de 2 conjuntos diferentes, o hash agr tem os apenas os valores que são exclusivos e não existiam no hash
+            Console.WriteLine("--------------------------------------");
+
+            Console.WriteLine("Fazendo a diferença de 2 conjuntos, um HashSet e outro SortedSet dentro de um hashSet");
+            conjuntoHashSet2.ExceptWith(conjuntoSortedSet);
+
+            foreach (string produtos in conjuntoHashSet2)
+            {
+                Console.WriteLine(produtos);
+            }
         }
     }
 }
