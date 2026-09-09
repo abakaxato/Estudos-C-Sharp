@@ -8,6 +8,7 @@
 #endregion Enunciado da questao
 
 
+using OlaMundo.Classes.EqualsHashCode;
 using OlaMundo.Classes.Generics;
 using OlaMundo.Exercicios.Aula144.Interfaces;
 using OlaMundo.Exercicios.Aula144.Service;
@@ -19,33 +20,62 @@ namespace OlaMundo
     {
         static void Main(string[] args)
         {
-            //Declarando uma nova instancia da classe SimpleCalculator
-            //Setando o tipo generico "U" com o tipo "int" e setando o valor "10" na sua instancia criada
-            SimpleCalculator<int> calculator = new(10);
+            //Equals
+            {
+                string a = "Maria";
+                string b = "Maria";
+                string c = "joao";
+                Console.WriteLine($"{a} {b} {c}");
+                //Validando que o "a" é igual ao "b" usando equals
+                Console.WriteLine(a.Equals(b));
+                //Validando que o "a" é diferente do "c" usando equals
+                Console.WriteLine(a.Equals(c));
+            }
+            Console.WriteLine("----------------------------------------------");
+            //HashCode
+            {
+                string d = "fernando";
+                string e = "fernando";
+                string f = "ana";
+                Console.WriteLine($"{d} {d.GetHashCode()} {e} {e.GetHashCode()} {f} {f.GetHashCode()}");
+                //Validando que o "d" é igual ao "e" usando hashCode
+                Console.WriteLine(d.GetHashCode() == e.GetHashCode());
+                //Validando que o "d" é diferente do "f" usando hashCode
+                Console.WriteLine(d.GetHashCode() == f.GetHashCode());
+            }
+            Console.WriteLine("----------------------------------------------");
+            //Testando equals e hashCode personalizados
+            Materia areiaBranca = new()
+            {
+                Cor = "Branca",
+                Peso = 0.01,
+                Nome = "Areia"
+            };
+            Console.WriteLine(areiaBranca.ToString());
 
-            //Chamando o método que vai apenas me retornar que tipo de dado foi settado-
-            //-Na instanciação da classe
-            calculator.GenericTypeOfClass();
+            Materia areiaMarrom = new()
+            {
+                Cor = "Marrom",
+                Peso = 0.01,
+                Nome = "Areia"
+            };
+            Console.WriteLine(areiaMarrom.ToString());
 
-            Console.WriteLine("---------------------------------");
-
-            //Chamando o método que faz um CompareTo entre o primeiro e o segundo valor
-            //Especifiquei no método que o tipo generico "T" vai ser o tipo "int"
-            //todos esses tipos implementam o Icomparable, por isso poderam ser selecionados
-
-            //Passei os valores aceitos por "string" como parametros do método
-            //como 'M' vem antes de 'P' na ordem Unicode/ASCII,  "Maria".CompareTo("Pele") retorna negativo — ou seja, "Maria" é menor que "Pele".
-            calculator.Calc<string>("Maria", "Pele");
-
-            Console.WriteLine("---------------------------------");
-
-            //Passei os valores aceitos por "int" como parametros do método
-            calculator.Calc<int>(1, 1);
-
-            Console.WriteLine("---------------------------------");
-
-            //Passei os valores aceitos por "double" como parametros do método
-            calculator.Calc<double>(2.02, 2.01);
+            Materia lamaMarrom = new()
+            {
+                Cor = "Marrom",
+                Peso = 0.50,
+                Nome = "Lama Marrom"
+            };
+            Console.WriteLine(lamaMarrom.ToString());
+            Console.WriteLine("----------------------------------------------");
+            Console.WriteLine("Testando se a areia branca é igual a areia marrom usando o equals (Nome e Peso)");
+            Console.WriteLine(areiaBranca.Equals(areiaMarrom));
+            Console.WriteLine("Testando se a lama marrom é igual a areia marrom usando o equals (Nome e Peso)");
+            Console.WriteLine(lamaMarrom.Equals(areiaMarrom));
+            Console.WriteLine("Testando se a lama marrom é igual a areia marrom usando o cashCode (hashCode da cor)");
+            Console.WriteLine("hash Code da lama marrom : " + lamaMarrom.GetHashCode());
+            Console.WriteLine(lamaMarrom.GetHashCode() == areiaMarrom.GetHashCode());
 
         }
     }
