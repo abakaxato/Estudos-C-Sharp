@@ -1,8 +1,28 @@
-﻿//Exercicio da aula 150
+﻿//Exercicio da aula 159
 
 
 #region Enunciado da questao
 /*
+Na contagem de votos de uma eleição, são gerados vários registros de votação contendo o nome do 
+candidato e a quantidade de votos (formato .csv) que ele obteve em uma urna de votação.
+Você deve fazer um programa para ler os registros de votação a partir de um arquivo, 
+e daí gerar um relatório consolidado com os totais de cada candidato.
+
+Dados que eu usei :
+
+Alex Green,21
+Maria Brown,30
+Bob Blue,15
+Alex Green,15
+Maria Brown,25
+Alex Green,22
+Bob Blue,10
+Maria Brown,35
+Alex Green,31
+Bob Blue,8
+
+
+Caminho : C:\temp\in.csv
 
 */
 #endregion Enunciado da questao
@@ -10,6 +30,7 @@
 
 
 using OlaMundo.Classes.EqualsHashCode;
+using System.Globalization;
 
 namespace OlaMundo
 {
@@ -17,58 +38,28 @@ namespace OlaMundo
     {
         static void Main(string[] args)
         {
-        
-            //Testando equals e hashCode personalizados
-            Materia areiaBranca = new()
+            Console.Write("Enter file full path : ");
+            string path = Path.GetFullPath(Console.ReadLine() ?? "");
+            string[] lines = File.ReadAllLines(path);
+            Dictionary<string, int> candidatedXVote = new();
+            int totalLines = lines.Length;
+            List<string> splitLine = new();
+            for (int i = 0; i < totalLines; i++)
             {
-                Cor = "Branca",
-                Peso = 0.01,
-                Nome = "Areia"
-            };
-            Console.WriteLine(areiaBranca.ToString());
-
-            Materia areiaMarrom = new()
+                string[] candidate = lines[i].Split(",");
+                if (candidatedXVote.ContainsKey(candidate[0]))
+                {
+                    candidatedXVote[candidate[0]] += int.Parse(candidate[1]);
+                }
+                else
+                {
+                    candidatedXVote[candidate[0]] = int.Parse(candidate[1]);
+                } 
+            }
+            foreach (KeyValuePair<string, int> keyValuePair in candidatedXVote)
             {
-                Cor = "Marrom",
-                Peso = 0.01,
-                Nome = "Areia"
-            };
-            Console.WriteLine(areiaMarrom.ToString());
-
-            Materia lamaMarrom = new()
-            {
-                Cor = "Marrom",
-                Peso = 0.50,
-                Nome = "Lama Marrom"
-            };
-            Console.WriteLine(lamaMarrom.ToString());
-            Console.WriteLine("----------------------------------------------");
-            Console.WriteLine("Testando se a areia branca é igual a areia marrom usando o equals (Nome e Peso)");
-            Console.WriteLine(areiaBranca.Equals(areiaMarrom));
-            Console.WriteLine("Testando se a lama marrom é igual a areia marrom usando o equals (Nome e Peso)");
-            Console.WriteLine(lamaMarrom.Equals(areiaMarrom));
-            Console.WriteLine("Testando se a lama marrom é igual a areia marrom usando o cashCode (hashCode da cor)");
-            Console.WriteLine("hash Code da lama marrom : " + lamaMarrom.GetHashCode());
-            Console.WriteLine(lamaMarrom.GetHashCode() == areiaMarrom.GetHashCode());
-            Console.WriteLine("----------------------------------------------");
-            //Fazendo uma chamada de método padrão do C# que vai utilizar a minha implementação do getHashCode e do Equals
-            //Se eu não tivesse implementado a comparação iria considerar a referencia em memoria como o obj de comparação
-
-            //Criando outra areia branca
-            Materia areiaBrancaCopia = new()
-            {
-                Cor = "Branca",
-                Peso = 0.01,
-                Nome = "Areia"
-            };
-            //Criando um conjunto hashSet de Materia
-            HashSet<Materia> materiaHashSet = new();
-            //Adicionando uma copia da areia branca no conjunto (Não é a areia branca e ocupa um lugar diferente da areia branca em memoria)
-            materiaHashSet.Add(areiaBrancaCopia);
-            //Verificando se existe areia branca na lista
-            Console.WriteLine("Verificando se existe areia branca na lista");
-            Console.WriteLine(materiaHashSet.Contains(areiaBranca));
-
+                Console.WriteLine($"Candidated : {keyValuePair.Key} Total Votes : {keyValuePair.Value}");
+            }
         }
     }
 }
