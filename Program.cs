@@ -13,73 +13,20 @@ namespace OlaMundo
     {
         static void Main(string[] args)
         {
-            //Predicate
-            //Delegate que espera um método que receba um valor e retorne um bool
-            {
-                //Criando uma lista de inteiros
-                List<int> numeros = [22, 4, 5, 12, 15, 77, 44, 13, 22];
-                //Fazendo um RemoveAll na lista criada utilizando uma expressão lambda
-                //no lugar do método com assinatura predicate que deveria ser passado como parâmetro
-                numeros.RemoveAll(numero => numero > 50);
-                //printando os valores da lista apos a remoção
-                foreach (var item in numeros)
-                {
-                    Console.WriteLine(item);
-                }
-            }
+            //Estudo de linq
+
+            //Criando um dataSource
+            int[] numbers = [12,44,50,23,45,13,88];
+
+            //Utilizando a função where (filtra os valores atraves de um método bool) utilizando o delegate Predicate
+            List<int> numberWhere = numbers.Where(number => (number % 2) == 0).ToList();
+            numberWhere.ForEach(Console.WriteLine);
             
-            Console.WriteLine("--------------------------------------");
+            Console.WriteLine("--------------------");
 
-            //Action
-            //Delegate que espera um método void que receba ate 16 parametros, ou seja, quer que seja associado a um método que faça algo, mas não retorne nada
-            {
-                //Criando uma lista de string
-                List<string> palavras = ["Bola","Carro","Limão","Computador"];
-                //Fazendo um ForEach na lista criada utilizando um método que encaixe com a assinatura Action que deve ser passado como parâmetro do ForEach
-                
-                //método  de print utilizado no ForEach do Action
-                static void AdicaoDeTexto(string n)
-                {
-                    Console.WriteLine(n + " Texto adicionado Action");
-                }
-
-                //Associação do método ao delegate
-                Action<string> action = AdicaoDeTexto;
-                
-                //passando o delegate como parâmetro do ForEach
-                palavras.ForEach(action);
-                
-            }
-            
-            Console.WriteLine("--------------------------------------");
-            
-            //Func
-            //Delegate que espera um método com um retorno <T> que recebe ate 16 parametros
-            {
-                //Criando uma lista de string
-                List<string> palavras = ["Bola","Carro","Limão","Computador"];
-
-                //método utilizado no ForEach do Action
-                static string Mudançadetexto(string texto)
-                {
-                    texto += " Texto Adicionado Func";
-                    return texto.ToUpper();
-                }
-
-                //Associando um método com a assinatura correta ao delegate Func
-                Func<string, string> func = Mudançadetexto;
-
-                //Fazendo um Select na lista criada utilizando um método que encaixe com a assinatura Func que deve ser passado como parâmetro do select
-                // O select retorna um IEnumerable, estou dando um UPscale e associando o valor a uma nova lista
-                List<string> novaLista = palavras.Select(func).ToList();
-
-                //printando a nova lista (por baixo dos panos estou utilizando o delegate Action no ForEach)
-                novaLista.ForEach(item => Console.WriteLine(item));
-                Console.WriteLine("--------------------------");
-                //Testando com uma expressão lambda ao inves do método
-                List<string> novaListaLambda = palavras.Select((palavra => palavra + "Texto adicionado na lambda")).ToList();
-                novaListaLambda.ForEach(item => Console.WriteLine(item));
-            }
+            //Utilizando a função Select (cria uma nova lista atraves de um método que recebe X valores e retorne 1 valor) utilizando o delegate Func
+            List<int> numbersSelect = numbers.Select(number => { if (number % 2 == 0) { return number * 10; } else { return number; } }).ToList();
+            numbersSelect.ForEach(Console.WriteLine); //Printando os valores da nova lista feita a partir do select
             
         }
     }
