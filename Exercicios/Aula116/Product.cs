@@ -8,8 +8,8 @@ namespace OlaMundo.Exercicios.Aula116
     {
         
 
-        protected string Name { get; set; } = string.Empty;
-        protected double Price { get; set; }
+        public string Name { get; set; } = string.Empty;
+        public double Price { get; set; }
         public Product(string name, double price)
         {
             Name = name;
@@ -18,6 +18,10 @@ namespace OlaMundo.Exercicios.Aula116
         public virtual string PriceTag() 
         {
             return $"Name : {Name}\nPrice : {Price}";
+        }
+        public override string ToString()
+        {
+            return $"Nome : {Name}, Preço {Price}";
         }
     }
 }
