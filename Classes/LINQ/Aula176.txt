@@ -1,0 +1,82 @@
+ //Criando os valores para lista
+            List<Product> products =
+            [   new Product("Oculos", 800.85),
+                new Product("Computador",5600.75),
+                new Product("Uniforme",2100.55),
+                new Product("Zebra",67.67),
+                new Product("Alicate",200.82),
+                new Product("Ovelha", 800.85),
+                
+            ];
+
+            //Utilizando o Linq de forma semelhante ao SQL
+            {
+                //Criando uma variavel que vai receber o resultado do LINQ
+                // p vai ser cada item ou no caso "produto" que vai ser iterado do meu dataSource
+                // é necessario usar o select no resultado do linq quando é feita a consulta estilo SQL (também é possivel usar groupBy)
+                IEnumerable<Product> result =
+                    from p in products
+                    orderby p.Price
+                    select p;
+                Console.WriteLine("Fazendo uma consulta direta em uma lista usando o linq com sintaxe semelhante ao SQL\n");
+                foreach (var item in result)
+                {
+                    Console.WriteLine(item);
+                }
+
+                Console.WriteLine("-----------------------------");
+
+                // Também é possível projetar (escolher) apenas as propriedades que você quer retornar no select
+                // Quando criamos um tipo anônimo (new { ... }), o C# gera um tipo sem nome em tempo de compilação
+                // por isso é obrigatório usar 'var' em vez de um tipo explícito como IEnumerable<Product>
+                var result2 =
+                    from p in products
+                    where p.Name.Contains("a", StringComparison.InvariantCultureIgnoreCase)
+                    orderby p.Name
+                    select new
+                    {
+                        p.Name
+                    };
+                
+                Console.WriteLine("\nObjetos anonimos advindos da projeção usando o select\n");
+                
+                foreach (var item in result2)
+                {
+                    Console.WriteLine(item);
+                }
+                
+                Console.WriteLine("-----------------------------");
+
+                Console.WriteLine("\nUtilizando um resultado como dataSource\n");
+                //É possivel utilizar um métodolinq na sintaxe SQL no resultado de outra consulta
+                //Nesse caso eu só utilizei o método para pular os 2 primeiros itens da coleção que virá do result2
+                var result3 =
+                    (from p in result2
+                     select p).Skip(2);
+                //Poderia ser mais direto também com um var result3 = result2.Skip(2);
+                
+                
+                foreach (var item in result3)
+                {
+                    Console.WriteLine(item);
+                }
+
+                Console.WriteLine("-----------------------------");
+
+                Console.WriteLine("\nUtilizando o primeiro resultado e fazendo um agrupamento por preço\n");
+                // A sintaxe de consulta exige terminar com 'select' ou 'group by' então não precisa colocar o select nesse caso
+                // O agrupamento gera uma coleção de IGrouping<chave, elemento>
+                // onde 'item.Key' é o preço e 'item' contém a lista dos produtos agrupados
+                var result4 =
+                    (from p in result
+                     group p by p.Price);
+
+                foreach (var item in result4)
+                {
+                    Console.WriteLine($"\nItens com o preço {item.Key}\n");
+                    foreach (var item2 in item)
+                    {
+                        Console.WriteLine(item2.Name);
+                    }
+                }
+            }

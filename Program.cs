@@ -8,6 +8,7 @@
 #endregion Enunciado da questao
 
 using OlaMundo.Exercicios.Aula116;
+using System.Threading.Channels;
 
 namespace OlaMundo
 {
@@ -15,6 +16,7 @@ namespace OlaMundo
     {
         static void Main(string[] args)
         {
+           
         }
     }
 }
