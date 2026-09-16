@@ -51,11 +51,12 @@ namespace OlaMundo
             double minimumWage = double.Parse(Console.ReadLine());
 
             Console.Write("\n Quer adicionar um filtro aos e-mails ? digite o texto ou para filtrar ou clique em enter para ver todos : ");
-            string filterEmail = Console.ReadLine() ?? "@";
+            string input = Console.ReadLine();
+            string filterEmail = string.IsNullOrWhiteSpace(input) ? "@" : input;
 
             var filtredWorkers = workers
                 .Where(worker => worker.Wage > minimumWage && (worker.Email.Split("@")[0].Contains(filterEmail)))
-                .OrderBy(workers => workers.Email).ToList();
+                .OrderBy(worker => worker.Email).ToList();
 
             Console.WriteLine($"\nEsse são os funcionarios que recebem acima de R${minimumWage.ToString("F2",CultureInfo.InvariantCulture)} e estão dentro do seu filtro '{filterEmail}': \n");
             filtredWorkers.ForEach(Console.WriteLine);
